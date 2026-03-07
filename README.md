@@ -8,11 +8,12 @@
 Your results may vary.
 
 ## Currently supported languages (more will be added):
-- Python (~1GB/s)
-- Rust (~1.7GB/s)
-- C++ (~1.7GB/s)
-- C# (~1.4GB/s)
+- Python (~1GB/s) COMMAND: python3 fib.py
+- Rust (~1.7GB/s) COMMAND: cargo run --release
+- C++ (~1.7GB/s) COMMAND: g++ -O3 main.cpp -o fib -lgmpxx -lgmp -pthread
+- C# (~1.4GB/s) COMMAND: dotnet build
+- C (2.3GB/s) COMMAND: gcc -O3 -march=native main.c -o fib -lgmp -lpthread
 
 ## Languages in progress:
-- C
 - Assembly
+- BrainF
