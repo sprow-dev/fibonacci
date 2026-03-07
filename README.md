@@ -4,6 +4,7 @@
 - (Kind of) Fast CPU (Ryzen 7 3800x)
 - The Linux Kernel (Includes dirty write paging)
 - A short 5 second test to prevent cache exhaustion
+
 Your results may vary.
 
 ## Currently supported languages (more will be added):
