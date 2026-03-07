@@ -70,7 +70,6 @@ struct WriteQueue {
       chunk.insert(chunk.end(),
                    cast_data,
                    cast_data+(size * sizeof(mp_limb_t)));
-      mpz_export(exp_buf.data(),&count,1,1,0,0,val.get_mpz_t());
 
       if (chunk.empty()) chunk.reserve(1024*1024);
       chunk.insert(chunk.end(),exp_buf.data(),exp_buf.data()+count);
