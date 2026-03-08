@@ -5,6 +5,8 @@
 - The Linux Kernel (Includes dirty write paging)
 - A short 5 second test to prevent cache exhaustion
 
+**BEFORE TRYING TO MODIFY**: Half this code is nearly unreadable so I'd be careful if I were you. (The assembly only has humorous comments, so good luck reading that one.)
+
 Your results may vary.
 
 ## Currently supported languages (more will be added):
