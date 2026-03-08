@@ -15,11 +15,11 @@ Your results may vary.
 - C++ (~1.7GB/s) COMMAND: g++ -O3 main.cpp -o fib -lgmpxx -lgmp -pthread
 - C# (~1.4GB/s) COMMAND: dotnet build
 - C (2.3GB/s) COMMAND: gcc -O3 -march=native main.c -o fib -lgmp -lpthread
-- Assembly (3.1GB/s) COMMAND: make
+- Assembly (3.2GB/s) COMMAND: make
 - BrainF (0.5GB/s) COMMAND: make
 - Lua (2GB/s) COMMAND: luajit fib.lua
+- Ruby (0.4GB/s) COMMAND: ruby --yjit fib.rb
 
 ## Languages in progress:
-- Ruby
 - Zig
 - Fortran
