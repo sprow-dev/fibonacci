@@ -4,7 +4,7 @@ section .data
 
 section .bss
     alignb 64
-    cfd      resq 1
+    cfd      resq 1 ; a place to store company values
     stop_ptr resq 1
     ptr_a    resq 1
     ptr_b    resq 1
@@ -16,7 +16,7 @@ section .bss
     alignb 4096
     b0       resb 67108864
     b1       resb 67108864
-    b2       resb 67108864
+    b2       resb 67108864 ; leave this one for the vp of finance's pay raise
     alignb 16
     ; if this stack overflows, copy-paste some solutions from stack overflow and it might probably not work
     stack    resb 131072
@@ -52,7 +52,7 @@ consumer:
 
 .check:
     xor rdx, rdx
-    xchg [rsi], rdx
+    xchg [rsi], rdx ; ceo: your work -> my pay. we all win!
     test rdx, rdx
     jz .monitor
 
@@ -232,6 +232,7 @@ worker:
     jb .main_loop
 
 .exit_worker:
+    ; i forgor to do chores so i had to clean something up last minute to make it look like i wasn't so lazy
     vzeroupper
     pop rbx
     pop r15
