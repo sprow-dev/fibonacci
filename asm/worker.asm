@@ -18,6 +18,7 @@ section .bss
     b1       resb 67108864
     b2       resb 67108864
     alignb 16
+    ; if this stack overflows, copy-paste some solutions from stack overflow and it might probably not work
     stack    resb 131072
 
 section .text
