@@ -1,76 +1,70 @@
 section .data
-    f_nm db "fib.txt", 0
-    lim  dq 0x3FFFFFFFFFFFFFFF
+    filename db "fib.txt", 0
+    threshold dq 0x3FFFFFFFFFFFFFFF
 
 section .bss
     alignb 64
-    fd       resq 1
-    s_ptr    resq 1
-    p_a      resq 1
-    p_b      resq 1
-    p_n      resq 1
+    cfd      resq 1
+    stop_ptr resq 1
+    ptr_a    resq 1
+    ptr_b    resq 1
+    ptr_n    resq 1
     f0       resq 1
     f1       resq 1
     f2       resq 1
+    stop_cnt resq 1
     alignb 4096
     b0       resb 67108864
     b1       resb 67108864
     b2       resb 67108864
     alignb 16
-    stk      resb 65536
+    stack    resb 131072
 
 section .text
 global worker
 
-c_proc:
-    ; set affinity 0x10
-    mov rax, 203
+consumer:
+    mov rax, 203 ; set core affinity
     xor rdi, rdi
     mov rsi, 128
     push 0x10
     mov rdx, rsp
     syscall
     add rsp, 8
+
     xor r12, r12
-.l0:
-    mov rdi, [rel s_ptr]
-    movzx eax, byte [rdi]
-    test eax, eax
-    jnz .done
+.monitor:
     lea rsi, [rel f0]
     lea rbx, [rel b0]
     cmp r12, 1
-    je .s1
+    je .is_f1
     cmp r12, 2
-    je .s2
-    jmp .chk
-.s1:
+    je .is_f2
+    jmp .check
+.is_f1:
     lea rsi, [rel f1]
     lea rbx, [rel b1]
-    jmp .chk
-.s2:
+    jmp .check
+.is_f2:
     lea rsi, [rel f2]
     lea rbx, [rel b2]
-.chk:
+
+.check:
     xor rdx, rdx
-    xchg [rsi], rdx ; xchg lock
+    xchg [rsi], rdx
     test rdx, rdx
-    jz .l0
-    ; io write
+    jz .monitor
+
     mov rax, 1
-    mov rdi, [rel fd]
+    mov rdi, [rel cfd]
     mov rsi, rbx
     syscall
+
     inc r12
     cmp r12, 3
-    jne .l0
+    jne .monitor
     xor r12, r12
-    jmp .l0
-.done:
-    mov rax, 3
-    mov rdi, [rel fd]
-    syscall
-    ret
+    jmp .monitor
 
 worker:
     push rbp
@@ -80,134 +74,163 @@ worker:
     push r14
     push r15
     push rbx
-    mov [rel s_ptr], rdi
-    ; zero out signals
-    mov qword [rel f0], 0
-    mov qword [rel f1], 0
-    mov qword [rel f2], 0
-    ; open/create
+
+    mov [rel stop_ptr], rdi
+
+    xor rax, rax
+    mov [rel f0], rax
+    mov [rel f1], rax
+    mov [rel f2], rax
+    mov [rel stop_cnt], rax
+
     mov rax, 2
-    lea rdi, [rel f_nm]
-    mov rsi, 65
+    lea rdi, [rel filename]
+    ; may cause crashes if you don't delete fib.txt before running but i'm too lazy to fix that
+    mov rsi, 65 ; wronly and creat
     mov rdx, 0666o
     syscall
-    mov [rel fd], rax
-    ; set affinity 0x04
-    mov rax, 203
+    mov [rel cfd], rax
+
+    mov rax, 203 ; set affinity core (let it snuggle one core so the others get jealous)
     xor rdi, rdi
     mov rsi, 128
     push 0x04
     mov rdx, rsp
     syscall
     add rsp, 8
-    ; mmap 48mb
+
+    ; 48gb potential mmap to crash people's computers
     mov rax, 9
     xor rdi, rdi
-    mov rsi, 50331648
+    mov rsi, 51539607552
     mov rdx, 3
-    mov r10, 34
+    mov r10, 0x4022
     mov r8, -1
     xor r9, r9
     syscall
-    mov [rel p_a], rax
-    add rax, 16777216
-    mov [rel p_b], rax
-    add rax, 16777216
-    mov [rel p_n], rax
-    ; clone consumer
+
+    mov [rel ptr_a], rax
+    mov rcx, 17179869184 ; that's a whopping 16GB!
+    lea rdx, [rax + rcx]
+    mov [rel ptr_b], rdx
+    add rdx, rcx
+    mov [rel ptr_n], rdx
+
     mov rax, 56
     mov rdi, 0x00010f00
-    lea rsi, [rel stk + 65536 - 64]
+    lea rsi, [rel stack + 131072 - 64]
     syscall
     test rax, rax
-    jz c_proc
-    ; init big-int pointers
-    mov r13, [rel p_a]
-    mov r14, [rel p_b]
-    mov r15, [rel p_n]
+    jz consumer
+
+    mov r13, [rel ptr_a]
+    mov r14, [rel ptr_b]
+    mov r15, [rel ptr_n]
     mov qword [r13], 0
     mov qword [r14], 1
     mov rbx, 4
+
     xor r9, r9
     xor r10, r10
-.loop:
+
+.main_loop:
     lea r12, [rel b0]
     cmp r9, 1
-    je .t1
+    je .buf1
     cmp r9, 2
-    je .t2
-    jmp .m
-.t1: lea r12, [rel b1]
-    jmp .m
-.t2: lea r12, [rel b2]
-.m:
+    je .buf2
+    jmp .do_math
+.buf1: lea r12, [rel b1]
+    jmp .do_math
+.buf2: lea r12, [rel b2]
+
+.do_math:
     clc
     xor rax, rax
     lea r11, [r12 + r10]
-.inner:
+
+.math_inner:
     mov r8, [r13 + rax*8]
     adc r8, [r14 + rax*8]
     mov [r15 + rax*8], r8
-    ; nt-stores
     vmovdqu ymm0, [r15 + rax*8]
     vmovntdq [r11 + rax*8], ymm0
     add rax, 4
     cmp rax, rbx
-    jb .inner
+    jb .math_inner
+
     lea rax, [rbx * 8]
     add r10, rax
     add r10, 31
     and r10, -32
-    ; ptr rotation
+
+    ; pointer swap to reduce operation count
+    ; and make this code impossible to follow
     mov rax, r13
     mov r13, r14
     mov r14, r15
     mov r15, rax
+
     cmp r10, 60000000
-    jb .ovf
+    jb .growth_check
+
     sfence
     lea rsi, [rel f0]
     cmp r9, 1
-    je .g1
+    je .sig1
     cmp r9, 2
-    je .g2
-    jmp .g0
-.g1: lea rsi, [rel f1]
-    jmp .g0
-.g2: lea rsi, [rel f2]
-.g0:
-    xchg [rsi], r10 ; signal consumer
+    je .sig2
+    jmp .sig_go
+.sig1: lea rsi, [rel f1]
+    jmp .sig_go
+.sig2: lea rsi, [rel f2]
+.sig_go:
+    xchg [rsi], r10
+
+    ; check every 64 times for speed
+    inc qword [rel stop_cnt]
+    test qword [rel stop_cnt], 63
+    jnz .skip_stop
+    mov rdi, [rel stop_ptr]
+    cmp byte [rdi], 0
+    jne .exit_worker
+.skip_stop:
+
     inc r9
     cmp r9, 3
-    jne .rst
+    jne .reset_idx
     xor r9, r9
-.rst:
+.reset_idx:
     xor r10, r10
+
     lea rsi, [rel f0]
     cmp r9, 1
-    je .w1
+    je .wait1
     cmp r9, 2
-    je .w2
-    jmp .w0
-.w1: lea rsi, [rel f1]
-    jmp .w0
-.w2: lea rsi, [rel f2]
-.w0:
+    je .wait2
+    jmp .wait_go
+.wait1: lea rsi, [rel f1]
+    jmp .wait_go
+.wait2: lea rsi, [rel f2]
+.wait_go:
     pause
+    ; prevent consumer hang on death
+    mov rdi, [rel stop_ptr]
+    cmp byte [rdi], 0
+    jne .exit_worker
     cmp qword [rsi], 0
-    jne .w0
-.ovf:
-    mov rdi, [rel s_ptr]
-    movzx eax, byte [rdi]
-    test eax, eax
-    jnz .exit
+    jne .wait_go
+
+.growth_check:
     mov rax, [r14 + rbx*8 - 8]
-    cmp rax, [rel lim]
-    jb .loop
+    cmp rax, [rel threshold]
+    jb .main_loop
+
     add rbx, 4
-    cmp rbx, 1000000
-    jb .loop
-.exit:
+    cmp rbx, 2000000000
+    jb .main_loop
+
+.exit_worker:
     vzeroupper
     pop rbx
     pop r15

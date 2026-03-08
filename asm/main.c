@@ -23,6 +23,7 @@ int main() {
 
     sleep(BENCH_TIME_S);
     stop = true;
+    printf("Told thread to stop.\n");
 
     pthread_join(t, NULL);
 
