@@ -13,7 +13,7 @@ Your results may vary.
 - C++ (~1.7GB/s) COMMAND: g++ -O3 main.cpp -o fib -lgmpxx -lgmp -pthread
 - C# (~1.4GB/s) COMMAND: dotnet build
 - C (2.3GB/s) COMMAND: gcc -O3 -march=native main.c -o fib -lgmp -lpthread
+- Assembly (3.1GB/s) COMMAND: make
 
 ## Languages in progress:
-- Assembly
 - BrainF
