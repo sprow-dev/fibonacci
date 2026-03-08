@@ -17,9 +17,9 @@ Your results may vary.
 - C (2.3GB/s) COMMAND: gcc -O3 -march=native main.c -o fib -lgmp -lpthread
 - Assembly (3.1GB/s) COMMAND: make
 - BrainF (0.5GB/s) COMMAND: make
+- Lua (2GB/s) COMMAND: luajit fib.lua
 
 ## Languages in progress:
-- Lua
 - Ruby
 - Zig
 - Fortran
