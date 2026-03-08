@@ -16,6 +16,10 @@ Your results may vary.
 - C# (~1.4GB/s) COMMAND: dotnet build
 - C (2.3GB/s) COMMAND: gcc -O3 -march=native main.c -o fib -lgmp -lpthread
 - Assembly (3.1GB/s) COMMAND: make
+- BrainF (0.5GB/s) COMMAND: make
 
 ## Languages in progress:
-- BrainF
+- Lua
+- Ruby
+- Zig
+- Fortran
