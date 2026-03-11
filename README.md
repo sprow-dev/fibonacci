@@ -23,7 +23,34 @@ Your results may vary.
 - Fortran (3.2GB/s) COMMAND: make
 
 ## Languages in progress:
-- None currently
+- Java
+- Kotlin
+- Haskell
+- Go
+- Swift
+- Perl
+- Javascript
+
+## Languages for future implementation:
+- Clojure
+- Erlang
+- Ada
+- D
+- Pascal
+- OCaml
+- Prolog
+- F#
+- Typescript
+- PHP
+- Tcl
+- Verilog
+- Nim
+- Befunge
+- Shakespeare Programming Language
+- INTERCAL
+- Chef
+- CSS
+- Regex
 
 ## Licensing:
 This code is licensed under the MIT License.
