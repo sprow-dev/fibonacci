@@ -2,7 +2,7 @@
 **Please note** that the benchmark scores you see are on a highly optimized setup with the following:
 - 1TB Gen 4 NVME SSD with DRAM cache
 - (Kind of) Fast CPU (Ryzen 7 3800x)
-- The Linux Kernel (Includes dirty write paging)
+- Linux 7 (Includes dirty write paging and larger EXT4 blocks)
 - A short 5 second test to prevent cache exhaustion
 
 **BEFORE TRYING TO MODIFY**: Half this code is nearly unreadable so I'd be careful if I were you. (The assembly only has humorous comments, so good luck reading that one.)
