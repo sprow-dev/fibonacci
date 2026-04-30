@@ -19,7 +19,7 @@ Your results may vary.
 - BrainF (0.5GB/s) COMMAND: make
 - Lua (2GB/s) COMMAND: luajit fib.lua
 - Ruby (0.4GB/s) COMMAND: ruby --yjit fib.rb
-- Zig (3.5GB/s) COMMAND: zig build-exe main.zig -O ReleaseFast --name fib
+- Zig (3.65GB/s) COMMAND: zig build-exe main.zig -O ReleaseFast --name fib
 - Fortran (3.2GB/s) COMMAND: make
 
 ## Languages in progress:
