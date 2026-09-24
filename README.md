@@ -23,6 +23,7 @@ Your results may vary.
 | Zig          | 3.65 **\*\***     | zig build-exe main.zig -O ReleaseFast --name fib    |
 | Fortran      | 3.2               | make                                                |
 | Java         | 0.4               | javac Fib.java                                      |
+| Kotlin       | 0.4               | kotlinc Fib.kt -include-runtime -d Fib.jar          |
 
 \*  This is repeating values from 0-255 and does not reflect real-world results.  
 \*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.
