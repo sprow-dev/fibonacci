@@ -2,28 +2,32 @@
 **Please note** that the benchmark scores you see are on a highly optimized setup with the following:
 - 1TB Gen 4 NVME SSD with DRAM cache
 - (Kind of) Fast CPU (Ryzen 7 3800x)
-- Linux 7 (Includes dirty write paging and larger EXT4 blocks)
-- A short 5 second test to prevent cache exhaustion
+- Linux 7
 
 **BEFORE TRYING TO MODIFY**: Half this code is nearly unreadable so I'd be careful if I were you.
 
 Your results may vary.
 
 ## Currently supported languages (more will be added):
-- Python (~1GB/s) COMMAND: python3 fib.py
-- Rust (~1.7GB/s) COMMAND: cargo run --release
-- C++ (~1.7GB/s) COMMAND: g++ -O3 main.cpp -o fib -lgmpxx -lgmp -pthread
-- C# (~1.4GB/s) COMMAND: dotnet build
-- C (2.3GB/s) COMMAND: gcc -O3 -march=native main.c -o fib -lgmp -lpthread
-- Assembly (3.2GB/s) COMMAND: make
-- BrainF (0.5GB/s) COMMAND: make
-- Lua (2GB/s) COMMAND: luajit fib.lua
-- Ruby (0.4GB/s) COMMAND: ruby --yjit fib.rb
-- Zig (3.65GB/s) COMMAND: zig build-exe main.zig -O ReleaseFast --name fib
-- Fortran (3.2GB/s) COMMAND: make
+| **Language** | **Speed (~GB/s)** | **Build Command**                                   |
+|--------------|-------------------|-----------------------------------------------------|
+| Python       | 1                 | python3 fib.py                                      |
+| Rust         | 1.7               | cargo run --release                                 |
+| C++          | 1.7               | g++ -O3 main.cpp -o fib -lgmpxx -lgmp -pthread      |
+| C#           | 1.4               | dotnet build                                        |
+| C            | 2.3               | gcc -O3 -march=native main.c -o fib -lgmp -lpthread |
+| Assembly     | 3.2               | make                                                |
+| BrainF       | 0.5 **\***        | make                                                |
+| Lua          | 2                 | luajit fib.lua                                      |
+| Ruby         | 0.4               | ruby --yjit fib.rb                                  |
+| Zig          | 3.65 **\*\***     | zig build-exe main.zig -O ReleaseFast --name fib    |
+| Fortran      | 3.2               | make                                                |
+| Java         | 0.4               | javac Fib.java                                      |
+
+\*  This is repeating values from 0-255 and does not reflect real-world results.  
+\*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.
 
 ## Languages in progress:
-- Java
 - Kotlin
 - Haskell
 - Go
