@@ -4,7 +4,7 @@ section .data
 
 section .bss
     alignb 64
-    cfd      resq 1 ; a place to store company values
+    cfd      resq 1
     stop_ptr resq 1
     ptr_a    resq 1
     ptr_b    resq 1
@@ -16,16 +16,18 @@ section .bss
     alignb 4096
     b0       resb 67108864
     b1       resb 67108864
-    b2       resb 67108864 ; leave this one for the vp of finance's pay raise
+    b2       resb 67108864 ; leave this one for the ceo's bonus
     alignb 16
-    ; if this stack overflows, copy-paste some solutions from stack overflow and it might probably not work
     stack    resb 131072
 
 section .text
 global worker
 
+; only suffering past this point
+; please proceed with caution and don't go past this point if you don't know assembly
+
 consumer:
-    mov rax, 203 ; set core affinity
+    mov rax, 203 ; enable core snuggling
     xor rdi, rdi
     mov rsi, 128
     push 0x10
@@ -92,7 +94,7 @@ worker:
     syscall
     mov [rel cfd], rax
 
-    mov rax, 203 ; set affinity core (let it snuggle one core so the others get jealous)
+    mov rax, 203 ; enable core snuggling
     xor rdi, rdi
     mov rsi, 128
     push 0x04
@@ -188,7 +190,6 @@ worker:
 .sig_go:
     xchg [rsi], r10
 
-    ; check every 64 times for speed
     inc qword [rel stop_cnt]
     test qword [rel stop_cnt], 63
     jnz .skip_stop
@@ -215,7 +216,7 @@ worker:
 .wait2: lea rsi, [rel f2]
 .wait_go:
     pause
-    ; prevent consumer hang on death
+    ; prevent some unknown hang
     mov rdi, [rel stop_ptr]
     cmp byte [rdi], 0
     jne .exit_worker
@@ -232,7 +233,8 @@ worker:
     jb .main_loop
 
 .exit_worker:
-    ; i forgor to do chores so i had to clean something up last minute to make it look like i wasn't so lazy
+    ; remember: don't leave your crap everywhere when writing code.
+    ; especially not in assembly
     vzeroupper
     pop rbx
     pop r15
