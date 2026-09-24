@@ -54,6 +54,3 @@ Your results may vary.
 
 ## Licensing:
 This code is licensed under the MIT License.
-
-## Alive check
-(9/13/26) Putting this here just so my account doesn't look abandoned.
