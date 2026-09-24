@@ -5,7 +5,7 @@
 - Linux 7 (Includes dirty write paging and larger EXT4 blocks)
 - A short 5 second test to prevent cache exhaustion
 
-**BEFORE TRYING TO MODIFY**: Half this code is nearly unreadable so I'd be careful if I were you. (The assembly only has humorous comments, so good luck reading that one.)
+**BEFORE TRYING TO MODIFY**: Half this code is nearly unreadable so I'd be careful if I were you.
 
 Your results may vary.
 
