@@ -29,7 +29,7 @@ Your results may vary.
 \*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.
 
 ## Languages in progress:
-- CSS
+- Javascript
 
 ## Priority future languages:
 - Haskell
@@ -57,6 +57,9 @@ Your results may vary.
 - INTERCAL
 - Chef
 - Regex
+
+## Not Planned
+- CSS
 
 ## Licensing:
 This code is licensed under the MIT License.
