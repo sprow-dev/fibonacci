@@ -29,6 +29,9 @@ Your results may vary.
 \*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.
 
 ## Languages in progress:
+- CSS
+
+## Priority future languages:
 - Haskell
 - Go
 - Swift
@@ -53,7 +56,6 @@ Your results may vary.
 - Shakespeare Programming Language
 - INTERCAL
 - Chef
-- CSS
 - Regex
 
 ## Licensing:
