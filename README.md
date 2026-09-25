@@ -29,7 +29,6 @@ Your results may vary.
 \*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.
 
 ## Languages in progress:
-- Kotlin
 - Haskell
 - Go
 - Swift
