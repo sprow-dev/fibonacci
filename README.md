@@ -26,13 +26,14 @@ Your results may vary.
 | Kotlin       | 0.4                      | kotlinc Fib.kt -include-runtime -d Fib.jar          |
 | JS (web)     | 0.006 (6MB/s) **\*\*\*** | python3 -m http.server 8000                         |
 | JS (node)    | 0.03 (30MB/s) **\*\*\*** | node main.js                                        |
+| Haskell      | 1.4                      | make                                                |
 
 \*  This is repeating values from 0-255 and does not reflect real-world results.  
 \*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.  
 \*\*\* JavaScript is designed for thousands of asynchronous actions, not one monolithic thread running heavy math and file operations.
 
 ## Languages in progress:
-- Haskell
+- None
 
 ## Priority future languages:
 - Go
