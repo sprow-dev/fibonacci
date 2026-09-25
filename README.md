@@ -24,19 +24,19 @@ Your results may vary.
 | Fortran      | 3.2               | make                                                |
 | Java         | 0.4               | javac Fib.java                                      |
 | Kotlin       | 0.4               | kotlinc Fib.kt -include-runtime -d Fib.jar          |
+| JS (web)     | 0.006 (6MB/s)     | python3 -m http.server 8000                         |
 
 \*  This is repeating values from 0-255 and does not reflect real-world results.  
 \*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.
 
 ## Languages in progress:
-- Javascript
+- JavaScript (Node)
 
 ## Priority future languages:
 - Haskell
 - Go
 - Swift
 - Perl
-- Javascript
 
 ## Languages for future implementation:
 - Clojure
