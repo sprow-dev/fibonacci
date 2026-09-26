@@ -34,7 +34,7 @@ Your results may vary.
 \*\*\* JS/TS is designed for thousands of asynchronous actions, not one monolithic thread running heavy math and file operations.
 
 ## Languages in progress:
-- None
+- Shakespeare Programming Language
 
 ## Priority future languages:
 - Go
@@ -56,7 +56,6 @@ Your results may vary.
 - Verilog
 - Nim
 - Befunge
-- Shakespeare Programming Language
 - INTERCAL
 - Chef
 - Regex
