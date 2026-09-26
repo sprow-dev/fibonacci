@@ -1,3 +1,4 @@
+// fibonacci generator and writer
 const { parentPort } = require('node:worker_threads');
 const fs = require('node:fs');
 
