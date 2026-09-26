@@ -11,26 +11,27 @@ Your results may vary.
 ## Currently supported languages (more will be added):
 | **Language** | **Speed (~GB/s)**        | **Build Command**                                   |
 |--------------|--------------------------|-----------------------------------------------------|
-| Python       | 1                        | python3 fib.py                                      |
+| Zig          | 3.65 **\*\***            | zig build-exe main.zig -O ReleaseFast --name fib    |
+| Assembly     | 3.2                      | make                                                |
+| Fortran      | 3.2                      | make                                                |
+| C            | 2.3                      | gcc -O3 -march=native main.c -o fib -lgmp -lpthread |
+| Lua          | 2                        | luajit fib.lua                                      |
 | Rust         | 1.7                      | cargo run --release                                 |
 | C++          | 1.7                      | g++ -O3 main.cpp -o fib -lgmpxx -lgmp -pthread      |
-| C#           | 1.4                      | dotnet build                                        |
-| C            | 2.3                      | gcc -O3 -march=native main.c -o fib -lgmp -lpthread |
-| Assembly     | 3.2                      | make                                                |
-| BrainF       | 0.5 **\***               | make                                                |
-| Lua          | 2                        | luajit fib.lua                                      |
-| Ruby         | 0.4                      | ruby --yjit fib.rb                                  |
-| Zig          | 3.65 **\*\***            | zig build-exe main.zig -O ReleaseFast --name fib    |
-| Fortran      | 3.2                      | make                                                |
-| Java         | 0.4                      | javac Fib.java                                      |
-| Kotlin       | 0.4                      | kotlinc Fib.kt -include-runtime -d Fib.jar          |
-| JS (web)     | 0.006 (6MB/s) **\*\*\*** | python3 -m http.server 8000                         |
-| JS (node)    | 0.03 (30MB/s) **\*\*\*** | node main.js                                        |
 | Haskell      | 1.4                      | make                                                |
+| C#           | 1.4                      | dotnet build                                        |
+| Python       | 1                        | python3 fib.py                                      |
+| BrainF       | 0.5 **\***               | make                                                |
+| Kotlin       | 0.4                      | kotlinc Fib.kt -include-runtime -d Fib.jar          |
+| Java         | 0.4                      | javac Fib.java                                      |
+| Ruby         | 0.4                      | ruby --yjit fib.rb                                  |
+| JS (node)    | 0.03 (30MB/s) **\*\*\*** | node main.js                                        |
+| TypeScript   | 0.03 (30MB/s) **\*\*\*** | node main.ts                                        |
+| JS (web)     | 0.006 (6MB/s) **\*\*\*** | python3 -m http.server 8000                         |
 
 \*  This is repeating values from 0-255 and does not reflect real-world results.  
 \*\* This only supports a very specific version of Zig. Possible optimizations in newer versions will not be added.  
-\*\*\* JavaScript is designed for thousands of asynchronous actions, not one monolithic thread running heavy math and file operations.
+\*\*\* JS/TS is designed for thousands of asynchronous actions, not one monolithic thread running heavy math and file operations.
 
 ## Languages in progress:
 - None
