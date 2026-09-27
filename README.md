@@ -34,7 +34,6 @@ Your results may vary.
 \*\*\* JS/TS is designed for thousands of asynchronous actions, not one monolithic thread running heavy math and file operations.
 
 ## Languages in progress:
-- Shakespeare Programming Language
 
 ## Priority future languages:
 - Go
@@ -62,6 +61,7 @@ Your results may vary.
 
 ## Not Planned
 - CSS
+- Shakespeare Programming Language
 
 ## Licensing:
 This code is licensed under the MIT License.
