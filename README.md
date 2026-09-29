@@ -21,6 +21,7 @@ Your results may vary.
 | Haskell      | 1.4                      | make                                                |
 | C#           | 1.4                      | dotnet build                                        |
 | Python       | 1                        | python3 fib.py                                      |
+| Go           | 0.5                      | go build -o fib main.go                             |
 | BrainF       | 0.5 **\***               | make                                                |
 | Kotlin       | 0.4                      | kotlinc Fib.kt -include-runtime -d Fib.jar          |
 | Java         | 0.4                      | javac Fib.java                                      |
@@ -34,23 +35,20 @@ Your results may vary.
 \*\*\* JS/TS is designed for thousands of asynchronous actions, not one monolithic thread running heavy math and file operations.
 
 ## Languages in progress:
-- Go
-- Pascal (This is similar to Go in philosophy but not entirely; those 2 diverge quickly under scrutiny. However, I've already done C which is what Go is most commonly compared to so I want a sister language that'll be a breeze to quickly go over.)
+- Pascal
 
 ## Priority future languages:
-- Go
 - Swift
 - Perl
 
 ## Languages for future implementation:
+- F#
 - Clojure
 - Erlang
 - Ada
 - D
-- Pascal
 - OCaml
 - Prolog
-- F#
 - Typescript
 - PHP
 - Tcl
@@ -61,7 +59,7 @@ Your results may vary.
 - Chef
 - Regex
 
-## Not Planned
+## Not Planned / Far Future
 - CSS
 - Shakespeare Programming Language
 
