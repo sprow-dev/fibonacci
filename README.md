@@ -34,6 +34,8 @@ Your results may vary.
 \*\*\* JS/TS is designed for thousands of asynchronous actions, not one monolithic thread running heavy math and file operations.
 
 ## Languages in progress:
+- Go
+- Pascal (This is similar to Go in philosophy but not entirely; those 2 diverge quickly under scrutiny. However, I've already done C which is what Go is most commonly compared to so I want a sister language that'll be a breeze to quickly go over.)
 
 ## Priority future languages:
 - Go
